@@ -45,21 +45,11 @@ runs:
         done
       shell: bash
 
-    # - name: Return connection info
-    #   id: cnx
-    #   run: |
-    #     echo "::set-output name=SS_DATABASE_CLASS::MySQLDatabase"
-    #     echo "::set-output name=SS_DATABASE_USERNAME::root"
-    #     echo "::set-output name=SS_DATABASE_PASSWORD::root"
-    #     echo "::set-output name=SS_DATABASE_SERVER::127.0.0.1"
-    #     echo "::set-output name=SS_DATABASE_NAME::SS_mysite"
-    #   shell: bash
-
     - name: Export Connection settings
       run: |
         echo "SS_DATABASE_CLASS=MySQLDatabase" >> $GITHUB_ENV
         echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
-        echo "SS_DATABASE_PASSWORD=monkey" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=root" >> $GITHUB_ENV
         echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
       shell: bash
