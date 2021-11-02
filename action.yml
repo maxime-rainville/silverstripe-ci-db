@@ -8,22 +8,22 @@ inputs:
   version:
     description: Which version to use
     required: false
-outputs:
-  SS_DATABASE_CLASS:
-    description: "Database class"
-    value: ${{ steps.cnx.outputs.SS_DATABASE_CLASS }}
-  SS_DATABASE_SERVER:
-    description: "Database server"
-    value: ${{ steps.cnx.outputs.SS_DATABASE_SERVER }}
-  SS_DATABASE_USERNAME:
-    description: "Database username"
-    value: ${{ steps.cnx.outputs.SS_DATABASE_USERNAME }}
-  SS_DATABASE_PASSWORD:
-    description: "Database password"
-    value: ${{ steps.cnx.outputs.SS_DATABASE_PASSWORD }}
-  SS_DATABASE_NAME:
-    description: "Database name"
-    value: ${{ steps.cnx.outputs.SS_DATABASE_NAME}}
+# outputs:
+#   SS_DATABASE_CLASS:
+#     description: "Database class"
+#     value: ${{ steps.cnx.outputs.SS_DATABASE_CLASS }}
+#   SS_DATABASE_SERVER:
+#     description: "Database server"
+#     value: ${{ steps.cnx.outputs.SS_DATABASE_SERVER }}
+#   SS_DATABASE_USERNAME:
+#     description: "Database username"
+#     value: ${{ steps.cnx.outputs.SS_DATABASE_USERNAME }}
+#   SS_DATABASE_PASSWORD:
+#     description: "Database password"
+#     value: ${{ steps.cnx.outputs.SS_DATABASE_PASSWORD }}
+#   SS_DATABASE_NAME:
+#     description: "Database name"
+#     value: ${{ steps.cnx.outputs.SS_DATABASE_NAME}}
 
 runs:
   using: "composite"
@@ -45,14 +45,23 @@ runs:
         done
       shell: bash
 
-    - name: Return connection info
-      id: cnx
+    # - name: Return connection info
+    #   id: cnx
+    #   run: |
+    #     echo "::set-output name=SS_DATABASE_CLASS::MySQLDatabase"
+    #     echo "::set-output name=SS_DATABASE_USERNAME::root"
+    #     echo "::set-output name=SS_DATABASE_PASSWORD::root"
+    #     echo "::set-output name=SS_DATABASE_SERVER::127.0.0.1"
+    #     echo "::set-output name=SS_DATABASE_NAME::SS_mysite"
+    #   shell: bash
+
+    - name: Export Connection settings
       run: |
-        echo "::set-output name=SS_DATABASE_CLASS::MySQLDatabase"
-        echo "::set-output name=SS_DATABASE_USERNAME::root"
-        echo "::set-output name=SS_DATABASE_PASSWORD::root"
-        echo "::set-output name=SS_DATABASE_SERVER::127.0.0.1"
-        echo "::set-output name=SS_DATABASE_NAME::SS_mysite"
+        echo "SS_DATABASE_CLASS=MySQLDatabase" >> $GITHUB_ENV
+        echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=root" >> $GITHUB_ENV
+        echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
+        echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
       shell: bash
 
 
