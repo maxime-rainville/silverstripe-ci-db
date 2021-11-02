@@ -17,21 +17,21 @@ runs:
       shell: bash
       
     - name: Set up MySQL
-      if: ${{ inputs.driver == 'mysql' }}
+      if: inputs.driver == 'mysql'
       uses: mirromutth/mysql-action@v1.1
       with:
         mysql version: ${{ inputs.version || 5.7 }}
         mysql root password: root
 
     - name: Set up MariaDB
-      if: ${{ inputs.driver == 'mariadb' }}
+      if: inputs.driver == 'mariadb'
       uses: getong/mariadb-action@v1.1
       with:
         mariadb version: ${{ inputs.version || 5.7 }}
         mysql root password: root
 
     - name: Wait for MySQL/MariaDB
-      if: ${{ inputs.driver == 'mysql' || inputs.driver == 'mariadb' }}
+      if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
       run: |
         while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
           sleep 1
@@ -39,7 +39,7 @@ runs:
       shell: bash
 
     - name: Export Connection settings
-      if: ${{ inputs.driver == 'mysql' || inputs.driver == 'mariadb' }}
+      if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
       run: |
         echo "SS_DATABASE_CLASS=MySQLDatabase" >> $GITHUB_ENV
         echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
