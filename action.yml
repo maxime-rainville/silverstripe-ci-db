@@ -1,0 +1,30 @@
+name: Silverstripe CMS CI Database step
+description: Run PHPUnit test for a Siverstripe CMS module
+inputs:
+  driver:
+    description: Which Database to use
+    required: true
+    default: mysql
+  version:
+    description: Which version to use
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Kill local MySQL instance
+      run: sudo service mysql stop
+      shell: bash
+      
+    - name: Set up MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql version: 5.7
+        mysql root password: root
+
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
+          sleep 1
+        done
+      shell: bash
