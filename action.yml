@@ -5,6 +5,9 @@ inputs:
     description: Which Database to use
     required: true
     default: mysql
+  version:
+    description: Which version to use
+    required: false
 
 runs:
   using: "composite"
@@ -16,7 +19,7 @@ runs:
     - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
-        mysql version: 8.0
+        mysql version: ${{ inputs.version || 5.7 }}
         mysql root password: root
 
     - name: Wait for MySQL
