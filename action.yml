@@ -16,7 +16,8 @@ runs:
   
     # Catch all failure statement  
     - name: Validate DB driver
-      if: inputs.driver != 'mysql' && inputs.driver != 'mariadb' && inputs.driver != 'postgresql'
+#      if: inputs.driver != 'mysql' && inputs.driver != 'mariadb' && inputs.driver != 'postgresql'
+      if: contains(['mysql','mariadb','postgresql'],inputs.driver) === false
       uses: actions/github-script@v3
       with:
         script: core.setFailed('${{ inputs.driver }} is not a supported DB')
@@ -77,7 +78,7 @@ runs:
       run: composer require silverstripe/postgresql --quiet --no-update
       shell: bash
     - name: Export Connection settings
-      if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
+      if: inputs.driver == 'postgresql'
       run: |
         echo "SS_DATABASE_CLASS=PostgreSQLDatabase" >> $GITHUB_ENV
         echo "SS_DATABASE_USERNAME=postgres" >> $GITHUB_ENV
