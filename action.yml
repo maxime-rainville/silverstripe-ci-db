@@ -27,7 +27,7 @@ runs:
       if: inputs.driver == 'mariadb'
       uses: getong/mariadb-action@v1.1
       with:
-        mariadb version: ${{ inputs.version || 5.7 }}
+        mariadb version: ${{ inputs.version }}
         mysql root password: root
 
     - name: Wait for MySQL/MariaDB
