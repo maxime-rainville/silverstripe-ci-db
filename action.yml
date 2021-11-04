@@ -68,6 +68,7 @@ runs:
         postgresql version: ${{ inputs.version || 'latest' }}
         postgresql db: 'postgres'
         postgresql user: 'postgres'
+        postgresql password: ''
     - name: Wait for PostgreSQL
       if: inputs.driver == 'postgresql'
       run: sleep 20
@@ -81,8 +82,8 @@ runs:
       run: |
         echo "SS_DATABASE_CLASS=PostgreSQLDatabase" >> $GITHUB_ENV
         echo "SS_DATABASE_USERNAME=postgres" >> $GITHUB_ENV
-        echo "SS_DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=" >> $GITHUB_ENV
         echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
-        echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
+        echo "SS_DATABASE_NAME=postgres" >> $GITHUB_ENV
       shell: bash
     
