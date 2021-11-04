@@ -78,10 +78,12 @@ runs:
     - name: Collect Docker Logs
       if: inputs.driver == 'postgresql'
       uses: jwalton/gh-docker-logs@v1.0.0
+      
    
     - name: Check running containers
       if: inputs.driver == 'postgresql'
       run: docker ps -a
+      shell: bash
 
         
         
