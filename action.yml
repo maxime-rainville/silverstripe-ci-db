@@ -68,6 +68,7 @@ runs:
         postgresql version: ${{ inputs.version || 'latest' }}
         postgresql db: postgres
         postgresql user: postgres
+        postgresql password: postgres
         
     - name: Wait / Sleep
       if: inputs.driver == 'postgresql'
@@ -89,6 +90,8 @@ runs:
         
     - name: Wait for PostgreSQL
       if: inputs.driver == 'postgresql'
+      env:
+        PGPASSWORD: postgres
       run: |
         while ! psql -U postgres -d postgres -h 127.0.0.1 -c "SELECT version()"; do
           sleep 1
@@ -105,5 +108,6 @@ runs:
         echo "SS_DATABASE_USERNAME=postgres" >> $GITHUB_ENV
         echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=postgres" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
       shell: bash
     
