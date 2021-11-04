@@ -74,7 +74,7 @@ runs:
       shell: bash
     - name: Install PostgreSQL module
       if: inputs.driver == 'postgresql'
-      run: composer require silverstripe/postgresql
+      run: composer require silverstripe/postgresql --prefer-stable --quiet
       shell: bash
     - name: Export Connection settings
       if: inputs.driver == 'postgresql'
