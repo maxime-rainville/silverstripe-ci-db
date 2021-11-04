@@ -68,6 +68,23 @@ runs:
         postgresql version: ${{ inputs.version || 'latest' }}
         postgresql db: postgres
         postgresql user: postgres
+        
+    - name: Wait / Sleep
+      if: inputs.driver == 'postgresql'
+      uses: jakejarvis/wait-action@v0.1.0
+      with:
+        time: '10s'
+   
+    - name: Collect Docker Logs
+      if: inputs.driver == 'postgresql'
+      uses: jwalton/gh-docker-logs@v1.0.0
+   
+    - name: Check running containers
+      if: inputs.driver == 'postgresql'
+      run: docker ps -a
+
+        
+        
     - name: Wait for PostgreSQL
       if: inputs.driver == 'postgresql'
       run: |
