@@ -70,37 +70,21 @@ runs:
         postgresql user: postgres
         postgresql password: postgres
         
-    - name: Wait / Sleep
+    - name: Install PostgreSQL module
       if: inputs.driver == 'postgresql'
-      uses: jakejarvis/wait-action@v0.1.0
-      with:
-        time: '10s'
-   
-    - name: Collect Docker Logs
-      if: inputs.driver == 'postgresql'
-      uses: jwalton/gh-docker-logs@v1.0.0
-      
-   
-    - name: Check running containers
-      if: inputs.driver == 'postgresql'
-      run: docker ps -a
+      run: composer require silverstripe/postgresql ^2 --prefer-stable --quiet
       shell: bash
-
-        
         
     - name: Wait for PostgreSQL
       if: inputs.driver == 'postgresql'
       env:
         PGPASSWORD: postgres
       run: |
-        while ! psql -U postgres -d postgres -h 127.0.0.1 -c "SELECT version()"; do
+        while ! psql -U postgres -d postgres -h 127.0.0.1 --quiet -c "SELECT version()"; do
           sleep 1
         done
       shell: bash
-    - name: Install PostgreSQL module
-      if: inputs.driver == 'postgresql'
-      run: composer require silverstripe/postgresql ^2 --prefer-stable --quiet
-      shell: bash
+      
     - name: Export Connection settings
       if: inputs.driver == 'postgresql'
       run: |
