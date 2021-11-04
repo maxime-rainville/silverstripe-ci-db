@@ -16,7 +16,7 @@ runs:
   
     # Catch all failure statement  
     - name: Validate DB driver
-      if: inputs.driver != 'mysql' || inputs.driver != 'mariadb' || inputs.driver != 'postgresql' || 
+      if: inputs.driver != 'mysql' || inputs.driver != 'mariadb' || inputs.driver != 'postgresql'
       uses: actions/github-script@v3
       with:
         script: core.setFailed('${{ inputs.driver }} is not a supported DB')
