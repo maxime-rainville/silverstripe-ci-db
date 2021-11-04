@@ -66,12 +66,15 @@ runs:
       uses: harmon758/postgresql-action@v1
       with:
         postgresql version: ${{ inputs.version || 'latest' }}
-        postgresql db: 'postgres'
-        postgresql user: 'postgres'
+        postgresql db: postgres
+        postgresql user: postgres
         postgresql password: ''
-    - name: Wait for PostgreSQL
-      if: inputs.driver == 'postgresql'
-      run: sleep 20
+    - name: Wait for MySQL/MariaDB
+      if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
+      run: |
+        while ! psql -U postgres -d postgres -h 127.0.0.1 -c "SELECT version()"; do
+          sleep 1
+        done
       shell: bash
     - name: Install PostgreSQL module
       if: inputs.driver == 'postgresql'
