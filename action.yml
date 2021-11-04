@@ -16,7 +16,6 @@ runs:
   
     # Catch all failure statement  
     - name: Validate DB driver
-#      if: inputs.driver != 'mysql' && inputs.driver != 'mariadb' && inputs.driver != 'postgresql'
       if: "!contains('mysql mariadb postgresql', inputs.driver)"
       uses: actions/github-script@v3
       with:
@@ -33,7 +32,7 @@ runs:
       if: inputs.driver == 'mysql'
       uses: mirromutth/mysql-action@v1.1
       with:
-        mysql version: ${{ inputs.version }}
+        mysql version: ${{ inputs.version || 'latest' }}
         mysql root password: root
 
     - name: Set up MariaDB
@@ -75,7 +74,7 @@ runs:
       shell: bash
     - name: Install PostgreSQL module
       if: inputs.driver == 'postgresql'
-      run: composer require silverstripe/postgresql --quiet --no-update
+      run: composer require silverstripe/postgresql --quiet
       shell: bash
     - name: Export Connection settings
       if: inputs.driver == 'postgresql'
