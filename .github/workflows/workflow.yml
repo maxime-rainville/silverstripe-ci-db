@@ -13,9 +13,12 @@ jobs:
   basic connection:
   
     name: Run
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
         db:
           - mysql
           - mariadb
