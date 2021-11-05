@@ -70,12 +70,15 @@ jobs:
     
     - name: Checkout
       uses: actions/checkout@v2
+
+    - run: mkdir myactions && cp action.yml myactions/
+    
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         repository: silverstripe/silverstripe-config
         ref: 1.2.0
 
-    - name: Clone the action
-      run: git clone --depth 1 --branch ${{ github.ref }} https://github.com/${{ github.repository }}.git myactions
 
     - run: ls -la
 
