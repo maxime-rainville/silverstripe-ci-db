@@ -10,13 +10,16 @@ on:
       - '**.md'
 
 jobs:
-  build:
+  basic connection:
   
     name: Run
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
+        db:
+          - mysql
+          - mariadb
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -26,7 +29,9 @@ jobs:
 
     - name: Run actions
       uses: ./
-      
+      with:
+        db: ${{ input.db }}
+
     - name: Test result
       run: |
         mysqladmin ping \
