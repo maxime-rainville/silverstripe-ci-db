@@ -72,9 +72,10 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
-      repository: silverstripe/silverstripe-config
-      ref: 1.2.0
-      path: ss
+      with:
+        repository: silverstripe/silverstripe-config
+        ref: 1.2.0
+        path: ss
 
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
