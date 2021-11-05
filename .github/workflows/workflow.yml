@@ -53,7 +53,7 @@ jobs:
           --password=${{ env.SS_DATABASE_PASSWORD }}; \
 
   integration:
-    name: Integration test actual Silverstripe site 
+    name: Integration test
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -77,6 +77,8 @@ jobs:
       with:
         repository: silverstripe/silverstripe-config
         ref: 1.2.0
+
+    - run: ls -la
 
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
