@@ -69,28 +69,26 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with: 
+        path: myaction
 
     - name: Checkout
       uses: actions/checkout@v2
       with:
         repository: silverstripe/silverstripe-config
         ref: 1.2.0
-        path: ss
 
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
-      working-directory: ss
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
 
     - name: Run actions
-      working-directory: ss
-      uses: ./
+      uses: ./myaction
       with:
         driver: ${{ matrix.db.driver }}
         driver: ${{ matrix.db.version }}
 
     - name: Run test suite
-      working-directory: ss
       uses: maxime-rainville/silverstripe-ci-phpunit@master
