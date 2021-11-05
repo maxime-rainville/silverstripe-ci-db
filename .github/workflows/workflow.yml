@@ -1,4 +1,19 @@
 name: build-test
+
+permissions:
+  actions: read
+  checks: none
+  contents: read
+  deployments: none
+  id_token: none
+  issues: none
+  discussions: none
+  packages: none
+  pull-requests: read
+  repository-projects: none
+  security-events: none
+  statuses: none
+
 on:
   push:
     branches:
@@ -15,6 +30,7 @@ jobs:
     name: Basic MysQL and Maria DB connection
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
@@ -26,9 +42,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: List file
-      run: ls -la
 
     - name: Run actions
       uses: ./
