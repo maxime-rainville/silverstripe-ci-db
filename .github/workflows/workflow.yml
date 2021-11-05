@@ -22,7 +22,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run actions
-      uses: ./actions
+      uses: ./action
 
     - name: Test result
       run: |
