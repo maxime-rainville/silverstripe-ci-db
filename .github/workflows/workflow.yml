@@ -67,28 +67,29 @@ jobs:
           - driver: postgresql
 
     steps:
+    
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        repository: silverstripe/silverstripe-config
+        ref: 1.2.0
 
-    - name: Clone PHP lib
-      run: git clone --depth 1 --branch 1.2.0 git@github.com:silverstripe/silverstripe-config.git
+    - name: Clone the action
+      run: git clone --depth 1 --branch ${{ github.ref }} git@github.com:${{ github.repository }}.git myactions
 
     - run: ls -la
 
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
-      working-directory: silverstripe-config
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
 
     - name: Run actions
       uses: ./myaction
-      working-directory: silverstripe-config
       with:
         driver: ${{ matrix.db.driver }}
         version: ${{ matrix.db.version }}
 
     - name: Run test suite
-      working-directory: silverstripe-config
       uses: maxime-rainville/silverstripe-ci-phpunit@master
