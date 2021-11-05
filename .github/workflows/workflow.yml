@@ -54,7 +54,7 @@ jobs:
 
   integration:
     name: Integration test actual Silverstripe site 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
