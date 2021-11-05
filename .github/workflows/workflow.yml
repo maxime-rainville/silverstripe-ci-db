@@ -1,17 +1,17 @@
 name: build-test
 
-permissions: read-all
-  # actions: read
-  # checks: none
-  # contents: read
-  # deployments: none
-  # issues: none
-  # discussions: none
-  # packages: none
-  # pull-requests: read
-  # repository-projects: none
-  # security-events: none
-  # statuses: none
+permissions:
+  actions: read
+  checks: none
+  contents: read
+  deployments: none
+  issues: none
+  discussions: none
+  packages: none
+  pull-requests: read
+  repository-projects: none
+  security-events: none
+  statuses: none
 
 on:
   push:
@@ -75,7 +75,7 @@ jobs:
         ref: 1.2.0
 
     - name: Clone the action
-      run: gh repo clone ${{ github.repository }} myactions -- --depth 1 --branch ${{ github.ref }} 
+      run: git clone --depth 1 --branch ${{ github.ref }} https://github.com/${{ github.repository }}.git myactions
 
     - run: ls -la
 
