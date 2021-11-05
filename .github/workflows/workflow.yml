@@ -75,7 +75,7 @@ jobs:
         ref: 1.2.0
 
     - name: Clone the action
-      run: git clone --depth 1 --branch ${{ github.ref }} git@github.com:${{ github.repository }}.git myactions
+      run: gh repo clone ${{ github.repository }} myactions --depth 1 --branch ${{ github.ref }} 
 
     - run: ls -la
 
