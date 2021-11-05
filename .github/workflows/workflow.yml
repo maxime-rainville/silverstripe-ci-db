@@ -10,9 +10,9 @@ on:
       - '**.md'
 
 jobs:
-  basic connection:
+  build:
   
-    name: Run
+    name: Basic MysQL and Maria DB connection
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
