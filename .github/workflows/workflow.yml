@@ -25,7 +25,6 @@ on:
 
 jobs:
   build:
-  
     name: Basic MysQL and Maria DB connection
     runs-on: ${{ matrix.os }}
     strategy:
@@ -33,7 +32,6 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
         db:
           - mysql
           - mariadb
@@ -47,9 +45,51 @@ jobs:
       with:
         driver: ${{ matrix.db }}
 
-    - name: Test result
+    - name: Test connection
       run: |
         mysqladmin ping \
           --host=${{ env.SS_DATABASE_SERVER }} \
           --user=${{ env.SS_DATABASE_USERNAME }} \
           --password=${{ env.SS_DATABASE_PASSWORD }}; \
+
+  integration:
+    name: Integration test actual Silverstripe site 
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        db:
+          - driver: mysql
+            version: 5
+          - driver: mysql
+            version: 8
+          - driver: mariadb
+          - driver: postgresql
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      repository: silverstripe/silverstripe-config
+      ref: 1.2.0
+      path: ss
+
+    - name: Set up PHP
+      uses: maxime-rainville/silverstripe-ci-setup@master
+      working-directory: ss
+      with:
+        composer-stability: --prefer-stable
+        phpVersion: 7.4
+
+    - name: Run actions
+      working-directory: ss
+      uses: ./
+      with:
+        driver: ${{ matrix.db.driver }}
+        driver: ${{ matrix.db.version }}
+
+    - name: Run test suite
+      working-directory: ss
+      uses: maxime-rainville/silverstripe-ci-phpunit@master
