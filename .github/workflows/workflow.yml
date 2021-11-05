@@ -5,7 +5,6 @@ permissions:
   checks: none
   contents: read
   deployments: none
-  id_token: none
   issues: none
   discussions: none
   packages: none
