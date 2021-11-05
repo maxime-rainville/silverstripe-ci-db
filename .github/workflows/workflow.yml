@@ -21,6 +21,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: List file
+      run: ls -la
+
     - name: Run actions
       uses: ./action
 
