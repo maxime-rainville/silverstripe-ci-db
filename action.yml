@@ -27,6 +27,7 @@ runs:
 
     
     - name: Kill local MySQL instance
+      if: runner.os == 'Windows'
       run: sudo service mysql stop
       shell: bash
       
