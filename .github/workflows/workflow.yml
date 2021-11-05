@@ -71,7 +71,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - run: mkdir myactions && cp action.yml myactions/
+    - run: cp action.yml /tmp/
     
     - name: Checkout
       uses: actions/checkout@v2
@@ -79,6 +79,7 @@ jobs:
         repository: silverstripe/silverstripe-config
         ref: 1.2.0
 
+    - run: mkdir myactions && cp /tmp/action.yml myactions/
 
     - run: ls -la
 
