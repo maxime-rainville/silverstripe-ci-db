@@ -45,7 +45,7 @@ jobs:
     - name: Run actions
       uses: ./
       with:
-        db: ${{ matrix.db }}
+        driver: ${{ matrix.db }}
 
     - name: Test result
       run: |
