@@ -4,7 +4,7 @@ This action is part of collection to make it easy to write CI for Silverstripe C
 
 It allows you to configure various database to work with Silverstripe CMS.
 
-# Usage
+## Simple Usage
 
 ```yml
 name: PHPUnit for Silverstripe CMS
@@ -25,7 +25,9 @@ jobs:
 
     - name: Set up database
       uses: maxime-rainville/silverstripe-ci-db@master
-
+      
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
 ```
+
+## Parameters

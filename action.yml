@@ -55,6 +55,11 @@ runs:
         done
       shell: bash
 
+    - name: Create test database
+      if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
+      run: mysql -h127.0.0.1 -uroot -proot -e "create database SS_mysite;"
+      shell: bash
+
     - name: Export Connection settings
       if: inputs.driver == 'mysql' || inputs.driver == 'mariadb'
       run: |
