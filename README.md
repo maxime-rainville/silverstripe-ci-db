@@ -30,4 +30,6 @@ jobs:
       uses: maxime-rainville/silverstripe-ci-phpunit@master
 ```
 
-## Parameters
+## Inputs
+The action accepts the following inputs:
+- 
