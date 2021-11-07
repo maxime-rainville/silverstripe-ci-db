@@ -5,3 +5,8 @@ This action is part of collection to make it easy to write CI for Silverstripe C
 It allows you to configure various database to work with Silverstripe CMS.
 
 # Usage
+
+```yml
+
+
+```
