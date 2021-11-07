@@ -46,11 +46,8 @@ jobs:
         driver: ${{ matrix.db }}
 
     - name: Test connection
-      run: |
-        mysql -s -N -e 'SELECT VERSION();'
-          -h${{ env.SS_DATABASE_SERVER }} \
-          -u${{ env.SS_DATABASE_USERNAME }} \
-          -p${{ env.SS_DATABASE_PASSWORD }}
+      run: "mysql -s -N -h${{ env.SS_DATABASE_SERVER }} u${{ env.SS_DATABASE_USERNAME }} p${{ env.SS_DATABASE_PASSWORD }} -e 'SELECT VERSION();'"
+          
 
   integration:
     name: Integration test
