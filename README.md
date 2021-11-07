@@ -7,31 +7,25 @@ It allows you to configure various database to work with Silverstripe CMS.
 # Usage
 
 ```yml
-name: CI
+name: PHPUnit for Silverstripe CMS
 
 on:
   push:
+    branches: [ '*' ]
   pull_request:
+    branches: [ master ]
 
 jobs:
-  build:
-    name: Silverstripe CMS CI
+  test:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
 
-    - name: Run actions
-      uses: ./myaction
-      with:
-        driver: ${{ matrix.db.driver }}
-        version: ${{ matrix.db.version }}
+    - name: Set up database
+      uses: maxime-rainville/silverstripe-ci-db@master
 
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
-
 ```
