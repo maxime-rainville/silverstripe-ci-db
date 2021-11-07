@@ -77,7 +77,7 @@ jobs:
       with:
         path: myaction/
 
-    - run: cp action.yml /tmp/
+    # - run: cp action.yml /tmp/
     
     # - name: Checkout
     #   uses: actions/checkout@v2
