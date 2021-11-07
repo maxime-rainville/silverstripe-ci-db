@@ -58,3 +58,47 @@ But you can read them in your action by accessing the following `env` keys.
       SS_DATABASE_NAME: ${{ env.SS_DATABASE_NAME }}
     run: vendor/bin/phpunit
 ```
+
+## Advanced usecase
+
+
+### Test multiple Database with a strategy
+
+The main purpose of this action is to make it easy to test multiple Databases for libraries that need to work accross different set up. Using a strategy matrix, you can easily run your CI against many Database.
+
+```yml
+name: PHPUnit
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        database:
+          - driver: mysql
+            version: 5.7
+          - driver: mysql
+          - driver: mariadb
+          - driver: postgresql
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Set up PHP
+      uses: maxime-rainville/silverstripe-ci-setup@master
+
+    - name: Set up database
+      uses: maxime-rainville/silverstripe-ci-db@master
+      with:
+        driver: ${{ matrix.database.driver }}
+        version: ${{ matrix.database.version }}
+
+    - name: Run test suite
+      uses: maxime-rainville/silverstripe-ci-phpunit@master
+```
