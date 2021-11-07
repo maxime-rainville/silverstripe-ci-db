@@ -1,5 +1,7 @@
 # Silverstripe CMS Database GitHub action
 
+[![build-test](https://github.com/maxime-rainville/silverstripe-ci-db/actions/workflows/workflow.yml/badge.svg)](https://github.com/maxime-rainville/silverstripe-ci-db/actions/workflows/workflow.yml)
+
 This action is part of collection to make it easy to write CI for Silverstripe CMS project using GitHub actions.
 
 It allows you to configure various database to work with Silverstripe CMS.
