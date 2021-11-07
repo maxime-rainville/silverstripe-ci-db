@@ -47,10 +47,10 @@ jobs:
 
     - name: Test connection
       run: |
-        mysql -s -N -e 'SELECT VERSION();'
+        mysql -s -N -e 'SELECT VERSION();' \
           -h ${{ env.SS_DATABASE_SERVER }} \
           -u ${{ env.SS_DATABASE_USERNAME }} \
-          -p ${{ env.SS_DATABASE_PASSWORD }}; \
+          -p ${{ env.SS_DATABASE_PASSWORD }}
 
   integration:
     name: Integration test
