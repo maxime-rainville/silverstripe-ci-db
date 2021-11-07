@@ -34,7 +34,7 @@ jobs:
           - ubuntu-latest
         db:
           - driver: mysql
-            expectedVersion: 8
+            expectedVersion: 5.7
           - driver: mysql
             version: 5.7
             expectedVersion: 5.7
@@ -61,7 +61,7 @@ jobs:
           ${{ env.SS_DATABASE_NAME }}`
         echo "VERSION='$VERSION'" >> $GITHUB_ENV
     
-    - name: Validate DB driver
+    - name: Validate DB version
       if: "!contains(env.VERSION, matrix.db.expectedVersion)"
       uses: actions/github-script@v3
       with:
