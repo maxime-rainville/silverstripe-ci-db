@@ -33,8 +33,13 @@ jobs:
         os:
           - ubuntu-latest
         db:
-          - mysql
-          - mariadb
+          - driver: mysql
+            expectedVersion: 8
+          - driver: mysql
+            version: 5.7
+            expectedVersion: 5.7
+          - driver: mariadb
+            expectedVersion: 10
 
     steps:
     - name: Checkout
@@ -43,16 +48,24 @@ jobs:
     - name: Run actions
       uses: ./
       with:
-        driver: ${{ matrix.db }}
+        driver: ${{ matrix.db.driver }}
+        version: ${{ matrix.db.version }}
 
     - name: Test connection
       run: |
-        mysql -s -N \
+        VERSION=`mysql -s -N \
           -h${{ env.SS_DATABASE_SERVER }} \
           -u${{ env.SS_DATABASE_USERNAME }} \
           -p${{ env.SS_DATABASE_PASSWORD }} \
           -e 'SELECT VERSION();' \
-          ${{ env.SS_DATABASE_NAME }}
+          ${{ env.SS_DATABASE_NAME }}`
+        echo "VERSION='$VERSION'" >> $GITHUB_ENV
+    
+    - name: Validate DB driver
+      if: "!contains(env.VERSION, matrix.db.expectedVersion)"
+      uses: actions/github-script@v3
+      with:
+        script: core.setFailed('${{ env.VERSION }} does not match expeced version ${{ matrix.db.expectedVersion }}')
           
 
   integration:
