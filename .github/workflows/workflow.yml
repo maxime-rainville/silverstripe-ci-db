@@ -69,19 +69,23 @@ jobs:
     steps:
     
     - run: ls -la
-    
-    - name: Checkout
-      uses: actions/checkout@v2
 
-    - run: cp action.yml /tmp/
+    - run: git clone --branch 1.2.0 https://github.com/silverstripe/silverstripe-config.git .
     
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        repository: silverstripe/silverstripe-config
-        ref: 1.2.0
+        path: myaction/
 
-    - run: mkdir myaction && cp /tmp/action.yml myaction/
+    - run: cp action.yml /tmp/
+    
+    # - name: Checkout
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: silverstripe/silverstripe-config
+    #     ref: 1.2.0
+
+    # - run: mkdir myaction && cp /tmp/action.yml myaction/
 
     
 
