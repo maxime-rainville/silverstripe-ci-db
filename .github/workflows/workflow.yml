@@ -34,7 +34,7 @@ jobs:
           - ubuntu-latest
         db:
           - driver: mysql
-            expectedVersion: 5.7
+            expectedVersion: 8
           - driver: mysql
             version: 5.7
             expectedVersion: 5.7
@@ -65,8 +65,7 @@ jobs:
       if: "!contains(env.VERSION, matrix.db.expectedVersion)"
       uses: actions/github-script@v3
       with:
-        script: core.setFailed("${{ env.VERSION }} does not match expeced version ${{ matrix.db.expectedVersion }}")
-          
+        script: core.setFailed("${{ env.VERSION }} does not match expected version ${{ matrix.db.expectedVersion }}")
 
   integration:
     name: Integration test

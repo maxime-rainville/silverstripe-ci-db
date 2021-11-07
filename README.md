@@ -31,5 +31,8 @@ jobs:
 ```
 
 ## Inputs
+
 The action accepts the following inputs:
-- 
+- `driver` which specify the database to install (default `mysql`)
+- `version` which specify the version of the detabase to install (default `latest`)
+- installPackage which specify wether to install the matchinig Silverstripe CMS module for this database (default: true)
