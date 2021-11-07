@@ -68,6 +68,8 @@ jobs:
 
     steps:
     
+    - run: ls -la
+    
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -81,7 +83,7 @@ jobs:
 
     - run: mkdir myaction && cp /tmp/action.yml myaction/
 
-    - run: ls -la
+    
 
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
