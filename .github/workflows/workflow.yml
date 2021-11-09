@@ -86,7 +86,7 @@ jobs:
     steps:
     
     - name: Clone test repo
-      run: git clone --branch 4.9.0 https://github.com/silverstripe/silverstripe-siteconfig.git .
+      run: git clone --branch 1.2.0 https://github.com/silverstripe/silverstripe-config.git .
     
     - name: Checkout action
       uses: actions/checkout@v2
@@ -100,8 +100,6 @@ jobs:
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
-
-    - run: composer require silverstripe/installer 4.9.0 ; git status ; ls -la app; ls -la code
 
     - name: Run actions
       uses: ./myaction
