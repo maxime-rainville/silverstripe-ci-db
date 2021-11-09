@@ -131,7 +131,7 @@ runs:
     - name: Export Connection settings
       if: inputs.driver == 'mssql'
       run: |
-        echo "SS_DATABASE_CLASS=MSSQLDatabase" >> $GITHUB_ENV
+        echo "SS_DATABASE_CLASS=MSSQLPDODatabase" >> $GITHUB_ENV
         echo "SS_DATABASE_USERNAME=sa" >> $GITHUB_ENV
         echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=tempdb" >> $GITHUB_ENV

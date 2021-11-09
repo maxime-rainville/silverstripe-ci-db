@@ -110,4 +110,4 @@ jobs:
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
       with:
-        args: tests/php/ORM/DatabaseTest.php
+        args: tests/php/ORM/DataQueryTest.php
