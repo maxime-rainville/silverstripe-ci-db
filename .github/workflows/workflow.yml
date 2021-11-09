@@ -101,7 +101,7 @@ jobs:
         composer-stability: --prefer-stable
         phpVersion: 7.4
 
-    - run: composer require silverstripe/recipe-cms 4.9.0
+    - run: composer require silverstripe/installer 4.9.0
 
     - name: Run actions
       uses: ./myaction
