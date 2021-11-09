@@ -80,6 +80,7 @@ jobs:
             version: 8
           - driver: mariadb
           - driver: postgresql
+          - driver: mssql
 
     steps:
     
