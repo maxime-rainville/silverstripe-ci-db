@@ -104,3 +104,68 @@ jobs:
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
 ```
+
+### Using with none Silverstripe CMS project
+
+While this is not the primary use case for this action, you can use it with none Silverstripe CMS project if you want. Here's an example workflow for Laravel project.
+
+Don't forget to set the `installPackage` input to `false` otherwise, it might try to install Silverstripe CMS dependencies in you project.
+
+```yml
+name: PHPUnit
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        database:
+          - driver: mysql
+            laravelConnection: mysql
+            version: 5.7
+          - driver: mysql
+            laravelConnection: mysql
+          - driver: mariadb
+            laravelConnection: mysql
+          - driver: postgresql
+            laravelConnection: pgsql
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 7.4
+        
+    - name: Install dependencies
+      run: composer install --no-progress
+
+    - name: Set up database
+      uses: maxime-rainville/silverstripe-ci-db@master
+      with:
+        driver: ${{ matrix.database.driver }}
+        version: ${{ matrix.database.version }}
+        installPackage: false
+
+    - name: Run test suite
+      run: composer install --no-progress
+      env:
+        DB_CONNECTION: ${{ matrix.database.laravelConnection }}
+        DB_HOST: ${{ env.SS_DATABASE_SERVER }}
+        DB_PORT: ${{ env.SS_DATABASE_PORT }}
+        DB_DATABASE: ${{ env.SS_DATABASE_NAME }}
+        DB_USERNAME: ${{ env.SS_DATABASE_USERNAME }}
+        DB_PASSWORD: ${{ env.SS_DATABASE_PASSWORD }}
+```
