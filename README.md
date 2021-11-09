@@ -43,6 +43,7 @@ Supported drivers are:
 - `mysql`
 - `mariadb`
 - `postgresql`
+- `mssql`
 
 ## Output
 
