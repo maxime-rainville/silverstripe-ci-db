@@ -86,7 +86,7 @@ jobs:
     steps:
     
     - name: Clone test repo
-      run: git clone --branch 1.2.0 https://github.com/silverstripe/silverstripe-config.git .
+      run: git clone --branch 4.9.0 https://github.com/silverstripe/silverstripe-siteconfig.git .
     
     - name: Checkout action
       uses: actions/checkout@v2
