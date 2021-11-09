@@ -44,6 +44,7 @@ Supported drivers are:
 - `mariadb`
 - `postgresql`
 - `mssql`
+- `sqlite`
 
 ## Output
 
