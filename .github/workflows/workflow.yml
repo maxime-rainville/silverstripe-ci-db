@@ -86,7 +86,7 @@ jobs:
     steps:
     
     - name: Clone test repo
-      run: git clone --branch 4.9.0 https://github.com/silverstripe/silverstripe-installer.git .
+      run: git clone --branch 4.9.0 https://github.com/silverstripe/silverstripe-framework.git .
     
     - name: Checkout action
       uses: actions/checkout@v2
@@ -110,4 +110,4 @@ jobs:
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
       with:
-        args: vendor/silverstripe/framework/tests/php/ORM/DatabaseTest.php
+        args: tests/php/ORM/DatabaseTest.php
