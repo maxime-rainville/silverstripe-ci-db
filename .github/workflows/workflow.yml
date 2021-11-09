@@ -81,24 +81,25 @@ jobs:
           - driver: mariadb
           - driver: postgresql
           - driver: mssql
+            extra_ext: 'sqlsrv, pdo_sqlsrv'
+          - driver: sqlite
 
     steps:
     
     - name: Clone test repo
-      run: git clone --branch 1.2.0 https://github.com/silverstripe/silverstripe-config.git .
+      run: git clone --branch 4.9.0 https://github.com/silverstripe/silverstripe-framework.git .
     
     - name: Checkout action
       uses: actions/checkout@v2
       with:
         path: myaction/
 
-    - run: ls -la
-
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
+        extensions: ${{ matrix.db.extra_ext }}
 
     - name: Run actions
       uses: ./myaction
@@ -106,5 +107,13 @@ jobs:
         driver: ${{ matrix.db.driver }}
         version: ${{ matrix.db.version }}
 
-    - name: Run test suite
-      uses: maxime-rainville/silverstripe-ci-phpunit@master
+    - name: Build Database
+      run: ./sake dev/build
+      env: 
+        SS_ENVIRONMENT_TYPE: dev
+        SS_DATABASE_CLASS: ${{ env.SS_DATABASE_CLASS }}
+        SS_DATABASE_SERVER: ${{ env.SS_DATABASE_SERVER }}
+        SS_DATABASE_USERNAME: ${{ env.SS_DATABASE_USERNAME }}
+        SS_DATABASE_PASSWORD: ${{ env.SS_DATABASE_PASSWORD }}
+        SS_DATABASE_NAME: ${{ env.SS_DATABASE_NAME }}
+        SS_SQLITE_DATABASE_PATH: ${{ env.SS_SQLITE_DATABASE_PATH }}

@@ -20,7 +20,7 @@ runs:
   
     # Catch all failure statement  
     - name: Validate DB driver
-      if: "!contains('mysql mariadb postgresql mssql', inputs.driver)"
+      if: "!contains('mysql mariadb postgresql mssql sqlite', inputs.driver)"
       uses: actions/github-script@v3
       with:
         script: core.setFailed('${{ inputs.driver }} is not a supported Database')
@@ -139,4 +139,25 @@ runs:
         echo "SS_DATABASE_PORT=1433" >> $GITHUB_ENV
       shell: bash
 
+    # SQLite
+    - name: Set up SQLite
+      if: inputs.driver == 'sqlite'
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+      shell: bash
     
+    - name: Install SQLite module
+      if: inputs.driver == 'sqlite' && inputs.installPackage == 'true'
+      run: composer require silverstripe/sqlite3 ^2 --prefer-stable --quiet
+      shell: bash
+        
+    - name: Export Connection settings
+      if: inputs.driver == 'sqlite'
+      run: |
+        echo "SS_DATABASE_CLASS=SQLite3Database" >> $GITHUB_ENV
+        echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
+        echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=" >> $GITHUB_ENV
+        echo "SS_SQLITE_DATABASE_PATH=':memory:'" >> $GITHUB_ENV
+      shell: bash
