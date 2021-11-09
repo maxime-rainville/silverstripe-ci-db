@@ -98,7 +98,7 @@ jobs:
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
-        extensions: sqlsrv, pdo_sqlsrv
+        extensions: ${{ inputs.driver == 'mssql' && 'sqlsrv, pdo_sqlsrv' }}
 
     - name: Run actions
       uses: ./myaction

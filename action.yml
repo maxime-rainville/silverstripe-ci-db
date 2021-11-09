@@ -119,17 +119,6 @@ runs:
       if: inputs.driver == 'mssql' && inputs.installPackage == 'true'
       run: composer require silverstripe/mssql ^2 --prefer-stable --quiet
       shell: bash
-
-    # - name: Config MS SQL PHP support
-    #   if: inputs.driver == 'mssql'
-    #   shell: bash
-    #   run: |
-    #     sudo pecl install sqlsrv || true
-    #     sudo pecl install pdo_sqlsrv || true
-    #     PHPVERSION=$(php -v|grep --only-matching --perl-regexp "((\d\.\d))"|head -1)
-    #     sudo printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/$PHPVERSION/mods-available/sqlsrv.ini
-    #     sudo printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/$PHPVERSION/mods-available/pdo_sqlsrv.ini
-    #     sudo phpenmod sqlsrv pdo_sqlsrv
         
     - name: Wait for MS SQL
       if: inputs.driver == 'mssql'
