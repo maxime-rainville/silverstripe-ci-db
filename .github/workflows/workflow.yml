@@ -107,7 +107,7 @@ jobs:
         version: ${{ matrix.db.version }}
 
     - name: Build Database
-      run: vendor/bin/sake dev/build
+      run: ./sake dev/build
       env: 
         SS_ENVIRONMENT_TYPE: dev
         SS_DATABASE_CLASS: ${{ env.SS_DATABASE_CLASS }}
