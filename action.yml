@@ -159,5 +159,5 @@ runs:
         echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
         echo "SS_DATABASE_PASSWORD=" >> $GITHUB_ENV
-        echo "SS_SQLITE_DATABASE_PATH=`pwd`/database/database.sqlite" >> $GITHUB_ENV
+        echo "SS_SQLITE_DATABASE_PATH=':memory:'" >> $GITHUB_ENV
       shell: bash
