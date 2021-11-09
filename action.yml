@@ -135,7 +135,7 @@ runs:
         echo "SS_DATABASE_USERNAME=sa" >> $GITHUB_ENV
         echo "SS_DATABASE_SERVER=127.0.0.1" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=tempdb" >> $GITHUB_ENV
-        echo "SS_DATABASE_PASSWORD=c0MplicatedP@ssword xxx" >> $GITHUB_ENV
+        echo "SS_DATABASE_PASSWORD=c0MplicatedP@ssword" >> $GITHUB_ENV
         echo "SS_DATABASE_PORT=1433" >> $GITHUB_ENV
       shell: bash
 
@@ -159,5 +159,5 @@ runs:
         echo "SS_DATABASE_USERNAME=root" >> $GITHUB_ENV
         echo "SS_DATABASE_NAME=SS_mysite" >> $GITHUB_ENV
         echo "SS_DATABASE_PASSWORD=" >> $GITHUB_ENV
-        echo "SS_SQLITE_DATABASE_PATH=`pwd`/database/database.sqlitexxx" >> $GITHUB_ENV
+        echo "SS_SQLITE_DATABASE_PATH=`pwd`/database/database.sqlite" >> $GITHUB_ENV
       shell: bash
