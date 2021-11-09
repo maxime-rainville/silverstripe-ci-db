@@ -93,8 +93,6 @@ jobs:
       with:
         path: myaction/
 
-    - run: ls -la
-
     - name: Set up PHP
       uses: maxime-rainville/silverstripe-ci-setup@master
       with:
@@ -111,4 +109,4 @@ jobs:
     - name: Run test suite
       uses: maxime-rainville/silverstripe-ci-phpunit@master
       with:
-        args: tests/php/ORM/DataQueryTest.php
+        args: tests/php/ORM/SQLSelectTest.php
