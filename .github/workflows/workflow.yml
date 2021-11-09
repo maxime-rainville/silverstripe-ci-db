@@ -101,7 +101,7 @@ jobs:
         composer-stability: --prefer-stable
         phpVersion: 7.4
 
-    - run: composer require silverstripe/installer 4.9.0 ; git status
+    - run: composer require silverstripe/installer 4.9.0 ; git status ; ls -la app; ls -la code
 
     - name: Run actions
       uses: ./myaction
