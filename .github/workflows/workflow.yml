@@ -106,7 +106,13 @@ jobs:
         driver: ${{ matrix.db.driver }}
         version: ${{ matrix.db.version }}
 
-    - name: Run test suite
-      uses: maxime-rainville/silverstripe-ci-phpunit@master
-      with:
-        args: tests/php/ORM/SQLSelectTest.php
+    - name: Build Database
+      run: vendor/bin/sake dev/build
+      env: 
+        SS_ENVIRONMENT_TYPE: dev
+        SS_DATABASE_CLASS: ${{ env.SS_DATABASE_CLASS }}
+        SS_DATABASE_SERVER: ${{ env.SS_DATABASE_SERVER }}
+        SS_DATABASE_USERNAME: ${{ env.SS_DATABASE_USERNAME }}
+        SS_DATABASE_PASSWORD: ${{ env.SS_DATABASE_PASSWORD }}
+        SS_DATABASE_NAME: ${{ env.SS_DATABASE_NAME }}
+        SS_SQLITE_DATABASE_PATH: ${{ env.SS_SQLITE_DATABASE_PATH }}
