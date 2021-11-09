@@ -81,6 +81,7 @@ jobs:
           - driver: mariadb
           - driver: postgresql
           - driver: mssql
+            extra_ext: 'sqlsrv, pdo_sqlsrv'
           - driver: sqlite
 
     steps:
@@ -98,7 +99,7 @@ jobs:
       with:
         composer-stability: --prefer-stable
         phpVersion: 7.4
-        extensions: ${{ inputs.driver == 'mssql' ? 'sqlsrv, pdo_sqlsrv' : '' }}
+        extensions: ${{ matrix.db.extra_ext }}
 
     - name: Run actions
       uses: ./myaction
